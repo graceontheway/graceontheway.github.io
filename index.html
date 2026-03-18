@@ -16,6 +16,7 @@
     --warm-white: #fffef9;
     --border: #ddd5c4;
     --muted: #8a7a64;
+    --amber: #c8873a;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -34,32 +35,33 @@
 
   /* Header */
   .header { text-align: center; margin-bottom: 2rem; padding-top: 0.5rem; }
+  h1 { font-family: 'Playfair Display', Georgia, serif; font-size: 2.4rem; font-weight: 400; color: var(--ink); letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 0.3rem; }
+  .byline { font-size: 0.88rem; color: var(--muted); font-style: italic; margin-bottom: 0.5rem; }
+  .subtitle { font-size: 1rem; color: var(--muted); font-style: italic; font-weight: 300; }
+  .divider { width: 40px; height: 1px; background: var(--border); margin: 1.1rem auto; }
 
-  h1 {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: 2.4rem;
-    font-weight: 400;
-    color: var(--ink);
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    margin-bottom: 0.3rem;
+  /* Stats bar */
+  .stats-bar {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
   }
 
-  .byline {
+  .stat-pill {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 0.4rem 1.1rem;
     font-size: 0.88rem;
     color: var(--muted);
-    font-style: italic;
-    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
   }
 
-  .subtitle {
-    font-size: 1rem;
-    color: var(--muted);
-    font-style: italic;
-    font-weight: 300;
-  }
-
-  .divider { width: 40px; height: 1px; background: var(--border); margin: 1.1rem auto; }
+  .stat-pill strong { color: var(--moss); font-size: 1rem; }
 
   /* Intro card */
   .intro-card {
@@ -68,155 +70,132 @@
     border-left: 4px solid var(--moss);
     border-radius: 10px;
     padding: 1.75rem 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
 
-  .intro-title {
+  .intro-title { font-family: 'Playfair Display', Georgia, serif; font-size: 1.05rem; font-weight: 600; color: var(--moss); margin-bottom: 0.75rem; }
+  .intro-text { font-size: 1rem; color: var(--bark); line-height: 1.8; margin-bottom: 1rem; }
+  .intro-text strong { color: var(--ink); font-weight: 700; }
+
+  .framework-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
+  .framework-pill { background: var(--sand); border: 1px solid var(--border); border-radius: 20px; padding: 0.3rem 0.9rem; font-size: 0.88rem; color: var(--bark); font-weight: 700; }
+  .framework-pill span { font-weight: 300; color: var(--muted); font-style: italic; }
+
+  .how-to { background: var(--sand); border-radius: 8px; padding: 1rem 1.25rem; margin-top: 1rem; }
+  .how-to-title { font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem; font-weight: 700; }
+  .how-to ol { padding-left: 1.25rem; font-size: 0.97rem; color: var(--bark); line-height: 1.9; }
+
+  /* Copyable prompt */
+  .prompt-card {
+    background: #f0f7f4;
+    border: 1px solid #b8ddd0;
+    border-left: 4px solid var(--moss);
+    border-radius: 10px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .prompt-card-title {
     font-family: 'Playfair Display', Georgia, serif;
     font-size: 1.05rem;
     font-weight: 600;
     color: var(--moss);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.4rem;
   }
 
-  .intro-text {
-    font-size: 1rem;
-    color: var(--bark);
-    line-height: 1.8;
-    margin-bottom: 1rem;
-  }
-
-  .intro-text strong { color: var(--ink); font-weight: 700; }
-
-  .framework-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin: 1rem 0;
-  }
-
-  .framework-pill {
-    background: var(--sand);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 0.3rem 0.9rem;
-    font-size: 0.88rem;
-    color: var(--bark);
-    font-weight: 700;
-  }
-
-  .framework-pill span {
-    font-weight: 300;
+  .prompt-card-subtitle {
+    font-size: 0.92rem;
     color: var(--muted);
+    margin-bottom: 1rem;
     font-style: italic;
   }
 
-  .how-to {
-    background: var(--sand);
+  .prompt-box {
+    background: white;
+    border: 1px solid #b8ddd0;
     border-radius: 8px;
-    padding: 1rem 1.25rem;
-    margin-top: 1rem;
-  }
-
-  .how-to-title {
-    font-size: 0.75rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 0.6rem;
-    font-weight: 700;
-  }
-
-  .how-to ol {
-    padding-left: 1.25rem;
-    font-size: 0.97rem;
+    padding: 1.1rem 1.25rem;
+    font-size: 0.92rem;
     color: var(--bark);
-    line-height: 1.9;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+    white-space: pre-wrap;
+    font-family: 'Lato', sans-serif;
   }
+
+  .copy-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.25rem;
+    background: var(--moss);
+    color: white;
+    border: none;
+    border-radius: 24px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .copy-btn:hover { background: #245e43; }
+  .copy-btn.copied { background: var(--sage); }
+
+  /* Score level guide */
+  .level-guide {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .level-guide-title { font-family: 'Playfair Display', Georgia, serif; font-size: 1.05rem; font-weight: 600; color: var(--ink); margin-bottom: 1rem; }
+
+  .level-rows { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .level-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+  }
+
+  .level-badge {
+    min-width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .level-row-text strong { font-weight: 700; color: var(--ink); }
+  .level-row-text span { color: var(--muted); font-size: 0.88rem; }
 
   /* Fields */
-  label {
-    display: block;
-    font-size: 0.75rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 0.5rem;
-    font-weight: 700;
-  }
-
-  input[type="text"], textarea {
-    width: 100%;
-    padding: 0.85rem 1rem;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    background: var(--warm-white);
-    font-family: 'Lato', sans-serif;
-    font-size: 1rem;
-    color: var(--ink);
-    outline: none;
-    transition: border-color 0.2s;
-    line-height: 1.6;
-  }
-
+  label { display: block; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; font-weight: 700; }
+  input[type="text"], textarea { width: 100%; padding: 0.85rem 1rem; border: 1px solid var(--border); border-radius: 6px; background: var(--warm-white); font-family: 'Lato', sans-serif; font-size: 1rem; color: var(--ink); outline: none; transition: border-color 0.2s; line-height: 1.6; }
   input:focus, textarea:focus { border-color: var(--sage); }
   input::placeholder, textarea::placeholder { color: #bbb0a0; font-style: italic; }
   .task-field { margin-bottom: 2rem; }
 
   /* Criteria */
-  .criterion {
-    background: var(--warm-white);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 1.5rem 1.75rem;
-    margin-bottom: 1rem;
-    transition: box-shadow 0.2s;
-  }
-
+  .criterion { background: var(--warm-white); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem 1.75rem; margin-bottom: 1rem; transition: box-shadow 0.2s; }
   .criterion:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-
   .criterion-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.15rem; }
   .criterion-icon { font-size: 1.15rem; }
-
-  .criterion-title {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--ink);
-  }
-
-  .criterion-subtitle {
-    font-size: 0.82rem;
-    color: var(--muted);
-    font-weight: 400;
-    letter-spacing: 0.02em;
-    margin-bottom: 0.25rem;
-    padding-left: 1.85rem;
-  }
-
-  .criterion-desc {
-    font-size: 0.97rem;
-    color: var(--muted);
-    font-style: italic;
-    margin-bottom: 1rem;
-    line-height: 1.5;
-  }
-
+  .criterion-title { font-family: 'Playfair Display', Georgia, serif; font-size: 1.15rem; font-weight: 600; color: var(--ink); }
+  .criterion-subtitle { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.25rem; padding-left: 1.85rem; }
+  .criterion-desc { font-size: 0.97rem; color: var(--muted); font-style: italic; margin-bottom: 1rem; line-height: 1.5; }
   .score-buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; }
 
-  .score-btn {
-    padding: 0.45rem 1rem;
-    border-radius: 20px;
-    border: 1px solid var(--border);
-    background: var(--sand);
-    color: var(--bark);
-    font-family: 'Lato', sans-serif;
-    font-size: 0.92rem;
-    cursor: pointer;
-    transition: all 0.15s;
-    white-space: nowrap;
-  }
-
+  .score-btn { padding: 0.45rem 1rem; border-radius: 20px; border: 1px solid var(--border); background: var(--sand); color: var(--bark); font-family: 'Lato', sans-serif; font-size: 0.92rem; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
   .score-btn:hover { border-color: var(--sage); color: var(--moss); }
   .score-btn.selected { background: var(--moss); border-color: var(--moss); color: white; font-weight: 700; }
 
@@ -227,17 +206,7 @@
   .feedback-section textarea { resize: vertical; min-height: 120px; }
 
   /* Summary */
-  .summary {
-    background: var(--warm-white);
-    border: 2px solid var(--border);
-    border-radius: 12px;
-    padding: 2rem;
-    text-align: center;
-    margin: 1.5rem 0;
-    transition: border-color 0.3s;
-    display: none;
-  }
-
+  .summary { background: var(--warm-white); border: 2px solid var(--border); border-radius: 12px; padding: 2rem; text-align: center; margin: 1.5rem 0; transition: border-color 0.3s; display: none; }
   .summary.visible { display: block; }
   .summary-label { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; font-weight: 700; }
   .summary-score { font-family: 'Playfair Display', Georgia, serif; font-size: 4rem; font-weight: 600; line-height: 1; transition: color 0.3s; }
@@ -246,7 +215,6 @@
 
   /* Buttons */
   .btn-row { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
-
   .btn { padding: 0.7rem 1.75rem; border-radius: 24px; font-family: 'Lato', sans-serif; font-size: 0.97rem; cursor: pointer; transition: all 0.15s; border: 1px solid var(--border); font-weight: 700; }
   .btn-primary { background: var(--moss); color: white; border-color: var(--moss); }
   .btn-primary:hover { background: #245e43; }
@@ -265,20 +233,31 @@
   .history-entry-score { font-family: 'Playfair Display', Georgia, serif; font-size: 1.6rem; font-weight: 600; white-space: nowrap; }
   .history-entry-notes { font-size: 0.93rem; color: var(--bark); margin-top: 0.5rem; font-style: italic; line-height: 1.65; border-left: 2px solid var(--border); padding-left: 0.75rem; }
 
+  .share-entry-btn { margin-top: 0.75rem; padding: 0.35rem 0.9rem; border-radius: 16px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-family: 'Lato', sans-serif; font-size: 0.82rem; cursor: pointer; transition: all 0.15s; }
+  .share-entry-btn:hover { border-color: var(--moss); color: var(--moss); }
+  .share-entry-btn.copied { color: var(--sage); border-color: var(--sage); }
+
   /* Footer */
   .footer { text-align: center; margin-top: 3rem; font-size: 0.8rem; letter-spacing: 0.18em; color: #c0b09a; text-transform: uppercase; font-weight: 700; }
+  .footer a { color: var(--muted); text-decoration: none; }
+  .footer a:hover { color: var(--moss); }
+
+  /* Toast */
+  .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--ink); color: white; padding: 0.7rem 1.5rem; border-radius: 8px; font-size: 0.92rem; transition: transform 0.3s ease; z-index: 100; white-space: nowrap; }
+  .toast.show { transform: translateX(-50%) translateY(0); }
 
   @media (max-width: 480px) {
     h1 { font-size: 2rem; }
-    .score-btn { font-size: 0.88rem; }
     body { font-size: 16px; }
-    .intro-card { padding: 1.25rem; }
+    .intro-card, .prompt-card, .level-guide { padding: 1.25rem; }
+    .criterion { padding: 1.25rem; }
   }
 </style>
 </head>
 <body>
 <div class="container">
 
+  <!-- Header -->
   <div class="header">
     <h1>AI Prompt Rubric</h1>
     <div class="byline">by Grace Chen</div>
@@ -286,6 +265,14 @@
     <p class="subtitle">Score each session. Watch yourself grow.</p>
   </div>
 
+  <!-- Stats bar -->
+  <div class="stats-bar">
+    <div class="stat-pill">🗓 Sessions logged: <strong id="sessionCount">0</strong></div>
+    <div class="stat-pill">📈 Average score: <strong id="avgScore">—</strong></div>
+    <div class="stat-pill">🏆 Best score: <strong id="bestScore">—</strong></div>
+  </div>
+
+  <!-- Intro -->
   <div class="intro-card">
     <div class="intro-title">Hi, I'm Grace. I learn things the hard way so you don't have to.</div>
     <p class="intro-text">
@@ -296,37 +283,90 @@
       <div class="framework-pill">Who <span>is this for?</span></div>
       <div class="framework-pill">What <span>do I need?</span></div>
       <div class="framework-pill">Why <span>does it matter?</span></div>
-      <div class="framework-pill">Feel <span>— what tone or emotion?</span></div>
+      <div class="framework-pill">Feel <span>— tone &amp; emotion</span></div>
       <div class="framework-pill">Shape <span>— format, length, constraints</span></div>
     </div>
     <p class="intro-text">
       Sounds simple. It is. And it works.<br><br>
-      The beautiful thing? <strong>I built this rubric by having a conversation with Claude.</strong> But the framework works with any AI — Claude, ChatGPT, Gemini, whatever you use. Your AI operating system is already inside you — you just need the right questions to draw it out.
+      <strong>I built this rubric by having a conversation with Claude.</strong> But the framework works with any AI — Claude, ChatGPT, Gemini, whatever you use. Your AI operating system is already inside you — you just need the right questions to draw it out.
     </p>
     <div class="how-to">
       <div class="how-to-title">How to use this rubric</div>
       <ol>
         <li>Have a conversation with your AI of choice using the <strong>Who · What · Why · Feel · Shape</strong> framework</li>
-        <li>Ask your AI to <strong>"debrief me"</strong> at the end of your task</li>
+        <li>At the end of your task, copy the prompt below and paste it into your AI</li>
         <li>Come back here and score yourself honestly across five criteria</li>
-        <li>Paste Claude's feedback into the notes field below your scores</li>
-        <li>Save — your history builds over time right here</li>
+        <li>Paste your AI's feedback into the notes field below your scores</li>
+        <li>Save — your history and stats build over time right here</li>
       </ol>
     </div>
   </div>
 
+  <!-- Copyable prompt -->
+  <div class="prompt-card">
+    <div class="prompt-card-title">📋 Your AI Debrief Prompt</div>
+    <div class="prompt-card-subtitle">Copy this and paste it into your AI at the end of any session.</div>
+    <div class="prompt-box" id="promptText">Please debrief my prompting session using these five criteria. For each one, give me a score from 1–5 and one sentence of specific feedback.
+
+1. Context Setting — Did I use Who, What, Why, Feel, and Shape to frame my ask? (1=barely any context, 3=most covered, 5=concise and complete)
+
+2. Clarity of Intention — Did I know what I wanted before I asked? (1=foggy goal, 3=output type defined, 5=could have briefed a human professional)
+
+3. Personal Detail — Did I include specifics only I would know? (1=generic, 3=personal enough to feel real, 5=irreplaceable — only I could have written this)
+
+4. Creative Reach — Did I push beyond what I could already picture? (1=played it safe, 3=showed curiosity, 5=genuinely explored what was possible)
+
+5. Back and Forth — Did I refine and shape the output like a partner? (1=accepted first draft, 3=gave useful feedback, 5=true creative collaboration)
+
+End with an overall score out of 5 and the one thing I should stretch next time.</div>
+    <button class="copy-btn" id="copyPromptBtn" onclick="copyPrompt()">
+      <span>📋</span> Copy Prompt
+    </button>
+  </div>
+
+  <!-- Score level guide -->
+  <div class="level-guide">
+    <div class="level-guide-title">What the scores mean</div>
+    <div class="level-rows">
+      <div class="level-row">
+        <div class="level-badge" style="background:#9b2226">1</div>
+        <div class="level-row-text"><strong>Beginner</strong> <span>— Still finding your footing. Every session teaches you something.</span></div>
+      </div>
+      <div class="level-row">
+        <div class="level-badge" style="background:#e76f51">2</div>
+        <div class="level-row-text"><strong>Developing</strong> <span>— You're getting the idea. A few more details and you'll be there.</span></div>
+      </div>
+      <div class="level-row">
+        <div class="level-badge" style="background:#c8873a">3</div>
+        <div class="level-row-text"><strong>Intermediate</strong> <span>— Solid foundation. The framework is starting to click.</span></div>
+      </div>
+      <div class="level-row">
+        <div class="level-badge" style="background:#52b788">4</div>
+        <div class="level-row-text"><strong>Advanced</strong> <span>— You know what you want and how to ask for it. Strong work.</span></div>
+      </div>
+      <div class="level-row">
+        <div class="level-badge" style="background:#2d6a4f">5</div>
+        <div class="level-row-text"><strong>Expert</strong> <span>— The framework is instinct now. This is what mastery looks like.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Task field -->
   <div class="task-field">
     <label for="taskName">Task / Session Name</label>
     <input type="text" id="taskName" placeholder="e.g. Birthday card for a friend, LinkedIn post draft...">
   </div>
 
+  <!-- Criteria -->
   <div id="criteria"></div>
 
+  <!-- Feedback -->
   <div class="feedback-section">
     <label for="feedbackText">AI Feedback / Your Notes</label>
     <textarea id="feedbackText" placeholder="Paste your AI's debrief here, or write your own reflection. What worked? What will you stretch next time?"></textarea>
   </div>
 
+  <!-- Summary -->
   <div class="summary" id="summary">
     <div class="summary-label">Overall Score</div>
     <div class="summary-score" id="summaryScore">—</div>
@@ -339,16 +379,36 @@
     <button class="btn btn-ghost" onclick="resetForm()">Start New Session</button>
   </div>
 
+  <!-- History -->
   <div class="history-section">
     <div class="history-title">Session History</div>
     <div id="historyList"><div class="history-empty">No sessions saved yet. Your history builds here over time.</div></div>
   </div>
 
-  <div class="footer">Who · What · Why · Feel · Shape</div>
+  <div class="footer">
+    Who · What · Why · Feel · Shape<br>
+    <span style="font-size:0.72rem; letter-spacing:0.05em; text-transform:none; font-weight:300;">Built by Grace Chen using AI conversation · <a href="https://www.linkedin.com/in/gracechenx/" target="_blank">Connect on LinkedIn</a></span>
+  </div>
 
 </div>
 
+<div class="toast" id="toast"></div>
+
 <script>
+const PROMPT_TEXT = `Please debrief my prompting session using these five criteria. For each one, give me a score from 1–5 and one sentence of specific feedback.
+
+1. Context Setting — Did I use Who, What, Why, Feel, and Shape to frame my ask? (1=barely any context, 3=most covered, 5=concise and complete)
+
+2. Clarity of Intention — Did I know what I wanted before I asked? (1=foggy goal, 3=output type defined, 5=could have briefed a human professional)
+
+3. Personal Detail — Did I include specifics only I would know? (1=generic, 3=personal enough to feel real, 5=irreplaceable — only I could have written this)
+
+4. Creative Reach — Did I push beyond what I could already picture? (1=played it safe, 3=showed curiosity, 5=genuinely explored what was possible)
+
+5. Back and Forth — Did I refine and shape the output like a partner? (1=accepted first draft, 3=gave useful feedback, 5=true creative collaboration)
+
+End with an overall score out of 5 and the one thing I should stretch next time.`;
+
 const criteria = [
   {
     id: "context", icon: "🧭",
@@ -405,7 +465,7 @@ const criteria = [
   {
     id: "iteration", icon: "🔄",
     label: "Back and Forth",
-    subtitle: "Did you refine and shape the output together?",
+    subtitle: "Did you refine and shape the output like a partner?",
     desc: "Great AI work is a conversation, not a one-shot request. Did you direct it like a partner?",
     levels: [
       { score: 1, label: "Passive", note: "Accepted the first output without any engagement" },
@@ -433,6 +493,18 @@ function getTier(avg) {
   if (avg >= 2.5) return "Intermediate";
   if (avg >= 1.5) return "Developing";
   return "Beginner";
+}
+
+function copyPrompt() {
+  navigator.clipboard.writeText(PROMPT_TEXT).then(() => {
+    const btn = document.getElementById('copyPromptBtn');
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.innerHTML = '<span>📋</span> Copy Prompt';
+      btn.classList.remove('copied');
+    }, 2500);
+  });
 }
 
 function renderCriteria() {
@@ -489,7 +561,9 @@ function saveSession() {
   history.unshift({ task, avg: avg.toFixed(1), date, notes });
   localStorage.setItem("graceRubricHistory", JSON.stringify(history));
   renderHistory();
+  updateStats();
   resetForm();
+  showToast("Session saved. Keep going. 🌿");
 }
 
 function resetForm() {
@@ -500,11 +574,38 @@ function resetForm() {
   renderCriteria();
 }
 
+function updateStats() {
+  const history = JSON.parse(localStorage.getItem("graceRubricHistory") || "[]");
+  document.getElementById("sessionCount").textContent = history.length;
+  if (history.length > 0) {
+    const avgs = history.map(h => parseFloat(h.avg));
+    const mean = (avgs.reduce((a,b) => a+b, 0) / avgs.length).toFixed(1);
+    const best = Math.max(...avgs).toFixed(1);
+    document.getElementById("avgScore").textContent = mean;
+    document.getElementById("avgScore").style.color = getColor(parseFloat(mean));
+    document.getElementById("bestScore").textContent = best;
+    document.getElementById("bestScore").style.color = getColor(parseFloat(best));
+  }
+}
+
+function shareEntry(task, avg, date, btn) {
+  const tier = getTier(parseFloat(avg));
+  const text = `I just scored ${avg}/5 (${tier}) on my AI prompting session using the AI Prompt Rubric by Grace Chen.\n\nSession: "${task}" — ${date}\n\nBuilding my AI operating system one session at a time. 🌿\n\ngraceontheway.github.io`;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '↗ Share this score'; btn.classList.remove('copied'); }, 2500);
+  });
+}
+
 function renderHistory() {
   const history = JSON.parse(localStorage.getItem("graceRubricHistory") || "[]");
   const el = document.getElementById("historyList");
-  if (!history.length) { el.innerHTML = '<div class="history-empty">No sessions saved yet. Your history builds here over time.</div>'; return; }
-  el.innerHTML = history.map(h => `
+  if (!history.length) {
+    el.innerHTML = '<div class="history-empty">No sessions saved yet. Your history builds here over time.</div>';
+    return;
+  }
+  el.innerHTML = history.map((h, i) => `
     <div class="history-entry">
       <div class="history-entry-top">
         <div>
@@ -514,11 +615,20 @@ function renderHistory() {
         <div class="history-entry-score" style="color:${getColor(parseFloat(h.avg))}">${h.avg}</div>
       </div>
       ${h.notes ? `<div class="history-entry-notes">${h.notes}</div>` : ""}
+      <button class="share-entry-btn" onclick="shareEntry('${h.task.replace(/'/g,"\\'")}','${h.avg}','${h.date}',this)">↗ Share this score</button>
     </div>`).join("");
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
 }
 
 renderCriteria();
 renderHistory();
+updateStats();
 document.getElementById("taskName").addEventListener("input", updateSummary);
 </script>
 </body>
