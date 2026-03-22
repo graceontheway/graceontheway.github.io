@@ -806,35 +806,109 @@
     entries.unshift(entry);
     saveEntries(entries);
     updateStats();
+
+    // Show success then reload the log view cleanly
     showToast("Session logged. Keep showing up. 🥊");
-    resetForm();
-    window.scrollTo(0, 0);
+    setTimeout(() => {
+      document.getElementById('view-log').innerHTML = buildLogForm();
+      document.getElementById('sessionDate').valueAsDate = new Date();
+      selectedDomain = null;
+      selectedMood = null;
+      window.scrollTo(0, 0);
+    }, 400);
+  }
+
+  function buildLogForm() {
+    return `
+    <div class="field-row">
+      <div>
+        <label class="field-label">Your Name</label>
+        <input type="text" id="trainerName" placeholder="First name" autocomplete="off">
+      </div>
+      <div>
+        <label class="field-label">Date</label>
+        <input type="date" id="sessionDate">
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Session Type</label>
+      <select id="sessionType">
+        <option value="">Select a session...</option>
+        <optgroup label="Classes">
+          <option>Fundamentals / Beginner Class</option>
+          <option>Intermediate Class</option>
+          <option>Advanced Class</option>
+          <option>Boxing Class</option>
+          <option>Clinching Class</option>
+          <option>Sparring Class</option>
+          <option>Open Mat</option>
+        </optgroup>
+        <optgroup label="Private & Other">
+          <option>Private Session</option>
+          <option>Competition Prep</option>
+          <option>Other</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Domain Focus</label>
+      <div class="pill-grid">
+        <button class="pill" onclick="toggleDomain(this)">Stance</button>
+        <button class="pill" onclick="toggleDomain(this)">Guard</button>
+        <button class="pill" onclick="toggleDomain(this)">Footwork</button>
+        <button class="pill" onclick="toggleDomain(this)">Strikes</button>
+        <button class="pill" onclick="toggleDomain(this)">Defense</button>
+        <button class="pill" onclick="toggleDomain(this)">Clinch</button>
+        <button class="pill" onclick="toggleDomain(this)">Sparring</button>
+        <button class="pill" onclick="toggleDomain(this)">Conditioning</button>
+        <button class="pill" onclick="toggleDomain(this)">Combinations &amp; Flow</button>
+        <button class="pill" onclick="toggleDomain(this, true)">Other</button>
+      </div>
+      <div class="other-input" id="otherDomainWrap">
+        <input type="text" id="otherDomain" placeholder="Describe the focus area...">
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Today&#39;s One Takeaway</label>
+      <div class="takeaway-wrap">
+        <textarea id="takeaway" placeholder="What&#39;s the one thing that clicked today? A correction, a breakthrough, something your coach said..."></textarea>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Coach Said... <span style="font-weight:300; text-transform:none; letter-spacing:0;">(optional)</span></label>
+      <input type="text" id="coachSaid" placeholder="A specific correction or instruction from your coach today" autocomplete="off">
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Additional Notes <span style="font-weight:300; text-transform:none; letter-spacing:0;">(optional)</span></label>
+      <textarea id="detail" placeholder="Anything else worth remembering about today&#39;s session..."></textarea>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">How did training feel?</label>
+      <div class="mood-grid">
+        <button class="mood-btn" onclick="toggleMood(this)">🔥 On fire</button>
+        <button class="mood-btn" onclick="toggleMood(this)">💪 Solid</button>
+        <button class="mood-btn" onclick="toggleMood(this)">🧱 Hard work</button>
+        <button class="mood-btn" onclick="toggleMood(this)">😤 Frustrated</button>
+        <button class="mood-btn" onclick="toggleMood(this)">🌱 Learning</button>
+      </div>
+    </div>
+
+    <button class="submit-btn" onclick="saveEntry()">Save This Session</button>
+    `;
   }
 
   function resetForm() {
-    // Reset all text inputs and textareas
-    ['trainerName','coachSaid','detail','otherDomain'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) { el.value = ''; el.blur(); }
-    });
-    // Reset select
-    const st = document.getElementById('sessionType');
-    if (st) st.selectedIndex = 0;
-    // Reset takeaway
-    const ta = document.getElementById('takeaway');
-    if (ta) { ta.value = ''; ta.blur(); }
-    // Reset date
+    document.getElementById('view-log').innerHTML = buildLogForm();
     document.getElementById('sessionDate').valueAsDate = new Date();
-    // Hide other domain
-    document.getElementById('otherDomainWrap').classList.remove('visible');
-    // Deselect all pills and mood buttons
-    document.querySelectorAll('.pill').forEach(p => p.classList.remove('selected'));
-    document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
-    // Reset state vars
     selectedDomain = null;
     selectedMood = null;
-    // Scroll to top
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo(0, 0);
   }
 
   function saveInjury() {
