@@ -1,1 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NJ Muay Thai Academy · Training Journal</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #1a3a6b;
+    --red-dark: #122a52;
+    --red-glow: rgba(26,58,107,0.2);
+    --gold: #c9a84c;
+    --gold-light: #e8c96a;
+    --dark: #080e1a;
+    --dark-2: #0f1a2e;
+    --dark-3: #162438;
+    --dark-4: #1d2f47;
+    --warm-mid: #3a5070;
+    --warm-light: #6a8aaa;
+    --cream: #f0f4ff;
+    --muted: #7a90b0;
+    --border: rgba(255,255,255,0.08);
+    --border-warm: rgba(201,168,76,0.25);
+  }
 
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Crimson Pro', Georgia, serif;
+    background: var(--dark);
+    color: var(--cream);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 50% 0%, rgba(26,58,107,0.35) 0%, transparent 60%),
+      radial-gradient(ellipse at 100% 100%, rgba(201,168,76,0.08) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .app {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 1rem 4rem;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 2.5rem 0 2rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+
+  .gym-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .app-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    letter-spacing: 0.05em;
+    color: var(--cream);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .app-title span { color: var(--red); }
+
+  .one-percent {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    margin: 0.2rem 0 0.4rem;
+  }
+
+  .one-percent span {
+    color: var(--gold);
+  }
+
+  .app-subtitle {
+    font-size: 0.95rem;
+    color: var(--muted);
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  /* Nav tabs */
+  .nav {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    background: var(--dark-2);
+    border-radius: 8px;
+    padding: 0.3rem;
+    border: 1px solid var(--border);
+  }
+
+  .nav-btn {
+    flex: 1;
+    padding: 0.6rem;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+
+  .nav-btn.active {
+    background: var(--red);
+    color: white;
+  }
+
+  .nav-btn:hover:not(.active) {
+    color: var(--cream);
+    background: var(--dark-3);
+  }
+
+  /* Views */
+  .view { display: none; }
+  .view.active { display: block; }
+
+  /* Form */
+  .form-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .field-label {
+    display: block;
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--dark-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--cream);
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--red);
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: var(--warm-mid);
+    font-style: italic;
+  }
+
+  select option {
+    background: var(--dark-3);
+    color: var(--cream);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 90px;
+    line-height: 1.5;
+  }
+
+  /* Domain pills */
+  .domain-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .domain-pill {
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--dark-2);
+    color: var(--muted);
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+
+  .domain-pill:hover {
+    border-color: var(--red);
+    color: var(--cream);
+  }
+
+  .domain-pill.selected {
+    background: var(--red);
+    border-color: var(--red);
+    color: white;
+  }
+
+  /* Takeaway highlight box */
+  .takeaway-box {
+    position: relative;
+    margin-bottom: 1.5rem;
+  }
+
+  .takeaway-box::before {
+    content: '"';
+    position: absolute;
+    top: -0.5rem;
+    left: 0.75rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--red);
+    opacity: 0.4;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .takeaway-box textarea {
+    padding-top: 1.5rem;
+    font-size: 1.05rem;
+    border-color: rgba(192,57,43,0.3);
+    min-height: 100px;
+  }
+
+  .takeaway-box textarea:focus {
+    border-color: var(--red);
+  }
+
+  /* Mood row */
+  .mood-row {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .mood-btn {
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--dark-2);
+    color: var(--muted);
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .mood-btn.selected {
+    background: var(--dark-3);
+    border-color: var(--gold);
+    color: var(--gold-light);
+  }
+
+  /* Submit button */
+  .submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background: var(--red);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 0.5rem;
+  }
+
+  .submit-btn:hover { background: var(--red-dark); }
+
+  /* Entries */
+  .entries-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .entries-count {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+  }
+
+  .entry-card {
+    background: var(--dark-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    transition: border-color 0.2s;
+    animation: slideIn 0.3s ease;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .entry-card:hover { border-color: rgba(192,57,43,0.3); }
+
+  .entry-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+    gap: 1rem;
+  }
+
+  .entry-meta { flex: 1; }
+
+  .entry-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    color: var(--cream);
+    margin-bottom: 0.2rem;
+  }
+
+  .entry-date {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  .entry-domain {
+    padding: 0.2rem 0.7rem;
+    background: var(--red);
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.08em;
+    color: white;
+    white-space: nowrap;
+  }
+
+  .entry-takeaway {
+    font-size: 1.05rem;
+    color: var(--cream);
+    font-style: italic;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+    padding-left: 0.75rem;
+    border-left: 2px solid var(--red);
+  }
+
+  .entry-detail {
+    font-size: 0.88rem;
+    color: var(--warm-light);
+    line-height: 1.5;
+  }
+
+  .entry-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .entry-mood {
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+
+  .share-btn {
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-warm);
+    background: transparent;
+    color: var(--gold);
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .share-btn:hover {
+    background: rgba(212,172,13,0.1);
+  }
+
+  .share-btn.copied {
+    color: var(--gold-light);
+    border-color: var(--gold-light);
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--muted);
+  }
+
+  .empty-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    opacity: 0.4;
+  }
+
+  .empty-text {
+    font-size: 1rem;
+    font-style: italic;
+  }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--dark-3);
+    border: 1px solid var(--border-warm);
+    color: var(--gold-light);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-style: italic;
+    transition: transform 0.3s ease;
+    z-index: 100;
+    white-space: nowrap;
+  }
+
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 480px) {
+    .app-title { font-size: 2.2rem; }
+    .field-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <div class="header">
+    <div class="gym-name">NJ Muay Thai Academy</div>
+    <div class="app-title">Training <span>Journal</span></div>
+    <div class="one-percent">1% <span>Better</span></div>
+    <p class="app-subtitle">One takeaway. Every session. Every bit of improvement counts.</p>
+  </div>
+
+  <div class="nav">
+    <button class="nav-btn active" onclick="showView('log')">Log Session</button>
+    <button class="nav-btn" onclick="showView('entries')">My Entries</button>
+  </div>
+
+  <!-- LOG SESSION -->
+  <div class="view active" id="view-log">
+
+    <div class="field-row">
+      <div>
+        <label class="field-label">Your Name</label>
+        <input type="text" id="trainerName" placeholder="First name">
+      </div>
+      <div>
+        <label class="field-label">Date</label>
+        <input type="date" id="sessionDate">
+      </div>
+    </div>
+
+    <div class="form-section">
+      <label class="field-label">Session Type</label>
+      <select id="sessionType">
+        <option value="">Select a session...</option>
+        <optgroup label="Regular Classes">
+          <option>Intermediate Muay Thai</option>
+          <option>Beginners Only Ramp-Up Class</option>
+          <option>Open Mat Time</option>
+        </optgroup>
+        <optgroup label="Specialty Classes">
+          <option>Clinching for Intermediates</option>
+          <option>Principles of Defense and Sparring</option>
+        </optgroup>
+        <optgroup label="Milestone Club Classes">
+          <option>300 Club – 300 Hours of Class Time</option>
+          <option>400 Club – Boxing Sparring</option>
+          <option>500 Club – Clinching (500 Hours)</option>
+          <option>600 Club – Box and Bows</option>
+        </optgroup>
+        <optgroup label="Private & Other">
+          <option>Private Session</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <div class="form-section">
+      <label class="field-label">Domain Focus</label>
+      <div class="domain-grid" id="domainGrid">
+        <button class="domain-pill" onclick="toggleDomain(this)">Stance</button>
+        <button class="domain-pill" onclick="toggleDomain(this)">Guard</button>
+        <button class="domain-pill" onclick="toggleDomain(this)">Footwork</button>
+        <button class="domain-pill" onclick="toggleDomain(this)">Strikes</button>
+        <button class="domain-pill" onclick="toggleDomain(this)">Defense</button>
+        <button class="domain-pill" onclick="toggleDomain(this)">Clinch</button>
+        <button class="domain-pill" onclick="toggleDomain(this)">Sparring</button>
+        <button class="domain-pill" onclick="toggleDomain(this)">Conditioning</button>
+        <button class="domain-pill" onclick="toggleDomain(this)">Combinations & Flow</button>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <label class="field-label">Today's One Takeaway</label>
+      <div class="takeaway-box">
+        <textarea id="takeaway" placeholder="What's the one thing that clicked today? A correction, a breakthrough, something your coach said..."></textarea>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <label class="field-label">More Detail (optional)</label>
+      <textarea id="detail" placeholder="What were the specific conditions? What led to this? How will you practice it?"></textarea>
+    </div>
+
+    <div class="form-section">
+      <label class="field-label">How did training feel today?</label>
+      <div class="mood-row">
+        <button class="mood-btn" onclick="toggleMood(this)">🔥 On fire</button>
+        <button class="mood-btn" onclick="toggleMood(this)">💪 Solid</button>
+        <button class="mood-btn" onclick="toggleMood(this)">🧱 Hard work</button>
+        <button class="mood-btn" onclick="toggleMood(this)">😤 Frustrated</button>
+        <button class="mood-btn" onclick="toggleMood(this)">🌱 Learning</button>
+      </div>
+    </div>
+
+    <button class="submit-btn" onclick="saveEntry()">Save This Session</button>
+  </div>
+
+  <!-- ENTRIES -->
+  <div class="view" id="view-entries">
+    <div class="entries-header">
+      <div class="entries-count" id="entriesCount">0 Sessions Logged</div>
+    </div>
+    <div id="entriesList"></div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // Set today's date
+  document.getElementById("sessionDate").valueAsDate = new Date();
+
+  let selectedDomain = null;
+  let selectedMood = null;
+
+  function showView(name) {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('view-' + name).classList.add('active');
+    event.target.classList.add('active');
+    if (name === 'entries') renderEntries();
+  }
+
+  function toggleDomain(el) {
+    document.querySelectorAll('.domain-pill').forEach(p => p.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedDomain = el.textContent;
+  }
+
+  function toggleMood(el) {
+    document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedMood = el.textContent;
+  }
+
+  function saveEntry() {
+    const name = document.getElementById('trainerName').value.trim();
+    const date = document.getElementById('sessionDate').value;
+    const type = document.getElementById('sessionType').value;
+    const takeaway = document.getElementById('takeaway').value.trim();
+    const detail = document.getElementById('detail').value.trim();
+
+    if (!name || !date || !type || !takeaway) {
+      showToast("Fill in your name, date, session type, and takeaway ✊");
+      return;
+    }
+
+    const entry = {
+      id: Date.now(),
+      name, date, type,
+      domain: selectedDomain || "General",
+      takeaway, detail,
+      mood: selectedMood || null,
+      saved: new Date().toISOString()
+    };
+
+    const entries = JSON.parse(localStorage.getItem('mtJournalEntries') || '[]');
+    entries.unshift(entry);
+    localStorage.setItem('mtJournalEntries', JSON.stringify(entries));
+
+    showToast("Session logged. Keep showing up. 🥊");
+    resetForm();
+  }
+
+  function resetForm() {
+    document.getElementById('trainerName').value = '';
+    document.getElementById('sessionDate').valueAsDate = new Date();
+    document.getElementById('sessionType').value = '';
+    document.getElementById('takeaway').value = '';
+    document.getElementById('detail').value = '';
+    document.querySelectorAll('.domain-pill').forEach(p => p.classList.remove('selected'));
+    document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
+    selectedDomain = null;
+    selectedMood = null;
+  }
+
+  function renderEntries() {
+    const entries = JSON.parse(localStorage.getItem('mtJournalEntries') || '[]');
+    const list = document.getElementById('entriesList');
+    const count = document.getElementById('entriesCount');
+    count.textContent = entries.length + (entries.length === 1 ? ' Session Logged' : ' Sessions Logged');
+
+    if (entries.length === 0) {
+      list.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-icon">🥊</div>
+          <div class="empty-text">No sessions yet. Log your first one.</div>
+        </div>`;
+      return;
+    }
+
+    list.innerHTML = entries.map(e => `
+      <div class="entry-card">
+        <div class="entry-top">
+          <div class="entry-meta">
+            <div class="entry-name">${e.name} · ${e.type}</div>
+            <div class="entry-date">${formatDate(e.date)}</div>
+          </div>
+          <div class="entry-domain">${e.domain}</div>
+        </div>
+        <div class="entry-takeaway">${e.takeaway}</div>
+        ${e.detail ? `<div class="entry-detail">${e.detail}</div>` : ''}
+        <div class="entry-footer">
+          <div class="entry-mood">${e.mood || ''}</div>
+          <button class="share-btn" onclick="shareEntry(${e.id}, this)">Share this ✦</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function formatDate(dateStr) {
+    const d = new Date(dateStr + 'T12:00:00');
+    return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+  }
+
+  function shareEntry(id, btn) {
+    const entries = JSON.parse(localStorage.getItem('mtJournalEntries') || '[]');
+    const e = entries.find(x => x.id === id);
+    if (!e) return;
+    const text = `🥊 Training log — ${formatDate(e.date)}\n\nSession: ${e.type} · ${e.domain}\n\n"${e.takeaway}"${e.detail ? '\n\n' + e.detail : ''}\n\n${e.mood || ''}\n\n#MuayThai #NJMuayThaiAcademy #TrainingJournal`;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Copied! ✓';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Share this ✦'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+  }
+</script>
+</body>
+</html>
