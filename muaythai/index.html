@@ -594,7 +594,7 @@
     <div class="field-row">
       <div>
         <label class="field-label">Your Name</label>
-        <input type="text" id="trainerName" placeholder="First name">
+        <input type="text" id="trainerName" placeholder="First name" autocomplete="off">
       </div>
       <div>
         <label class="field-label">Date</label>
@@ -651,7 +651,7 @@
 
     <div class="field-group">
       <label class="field-label">Coach Said... <span style="font-weight:300; text-transform:none; letter-spacing:0;">(optional)</span></label>
-      <input type="text" id="coachSaid" placeholder="A specific correction or instruction from your coach today">
+      <input type="text" id="coachSaid" placeholder="A specific correction or instruction from your coach today" autocomplete="off">
     </div>
 
     <div class="field-group">
@@ -808,20 +808,18 @@
     updateStats();
     showToast("Session logged. Keep showing up. 🥊");
     resetForm();
+    window.scrollTo(0, 0);
   }
 
   function resetForm() {
-    document.getElementById('trainerName').value = '';
+    const fields = ['trainerName','sessionType','takeaway','coachSaid','detail','otherDomain'];
+    fields.forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
     document.getElementById('sessionDate').valueAsDate = new Date();
-    document.getElementById('sessionType').value = '';
-    document.getElementById('takeaway').value = '';
-    document.getElementById('coachSaid').value = '';
-    document.getElementById('detail').value = '';
-    document.getElementById('otherDomain').value = '';
     document.getElementById('otherDomainWrap').classList.remove('visible');
     document.querySelectorAll('.pill').forEach(p => p.classList.remove('selected'));
     document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
     selectedDomain = null; selectedMood = null;
+    window.scrollTo(0, 0);
   }
 
   function saveInjury() {
