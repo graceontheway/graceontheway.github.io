@@ -523,6 +523,66 @@
     line-height: 1.8;
   }
 
+  /* Success screen */
+  .success-screen {
+    text-align: center;
+    padding: 3rem 1rem;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .success-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .success-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .success-subtitle {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .success-btn {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    background: var(--ink);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-bottom: 1rem;
+  }
+
+  .success-btn:hover { background: #2d2d50; }
+
+  .success-link {
+    display: block;
+    font-size: 0.88rem;
+    color: var(--muted);
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    background: none;
+    border: none;
+    font-family: 'Lato', sans-serif;
+    margin: 0 auto;
+  }
+
+  .success-link:hover { color: var(--ink); }
+
   /* Toast */
   .toast {
     position: fixed;
@@ -807,16 +867,11 @@
     saveEntries(entries);
     updateStats();
 
-    // Show success then reload the log view cleanly
-    showToast("Session logged. Keep showing up. 🥊");
-    setTimeout(function() {
-      var logView = document.getElementById('view-log');
-      logView.innerHTML = buildLogForm();
-      document.getElementById('sessionDate').valueAsDate = new Date();
-      selectedDomain = null;
-      selectedMood = null;
-      window.scrollTo(0, 0);
-    }, 600);;
+    // Show success screen
+    selectedDomain = null;
+    selectedMood = null;
+    showSuccessScreen();
+    window.scrollTo(0, 0);;
   }
 
   function buildLogForm() {
@@ -905,6 +960,25 @@
   }
 
   function resetForm() {
+    document.getElementById('view-log').innerHTML = buildLogForm();
+    document.getElementById('sessionDate').valueAsDate = new Date();
+    selectedDomain = null;
+    selectedMood = null;
+    window.scrollTo(0, 0);
+  }
+
+  function showSuccessScreen() {
+    document.getElementById('view-log').innerHTML = `
+      <div class="success-screen">
+        <div class="success-icon">🥊</div>
+        <div class="success-title">Session saved!</div>
+        <div class="success-subtitle">Keep showing up. Every session counts.</div>
+        <button class="success-btn" onclick="showNewSessionForm()">Log Another Session</button><br>
+        <button class="success-link" onclick="showView('entries', document.querySelectorAll('.nav-btn')[1])">View My Journal</button>
+      </div>`;
+  }
+
+  function showNewSessionForm() {
     document.getElementById('view-log').innerHTML = buildLogForm();
     document.getElementById('sessionDate').valueAsDate = new Date();
     selectedDomain = null;
