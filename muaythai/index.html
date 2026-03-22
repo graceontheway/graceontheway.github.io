@@ -812,14 +812,29 @@
   }
 
   function resetForm() {
-    const fields = ['trainerName','sessionType','takeaway','coachSaid','detail','otherDomain'];
-    fields.forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
+    // Reset all text inputs and textareas
+    ['trainerName','coachSaid','detail','otherDomain'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) { el.value = ''; el.blur(); }
+    });
+    // Reset select
+    const st = document.getElementById('sessionType');
+    if (st) st.selectedIndex = 0;
+    // Reset takeaway
+    const ta = document.getElementById('takeaway');
+    if (ta) { ta.value = ''; ta.blur(); }
+    // Reset date
     document.getElementById('sessionDate').valueAsDate = new Date();
+    // Hide other domain
     document.getElementById('otherDomainWrap').classList.remove('visible');
+    // Deselect all pills and mood buttons
     document.querySelectorAll('.pill').forEach(p => p.classList.remove('selected'));
     document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
-    selectedDomain = null; selectedMood = null;
-    window.scrollTo(0, 0);
+    // Reset state vars
+    selectedDomain = null;
+    selectedMood = null;
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function saveInjury() {
