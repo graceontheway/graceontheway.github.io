@@ -3,161 +3,180 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NJ Muay Thai Academy · Training Journal</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<title>Muay Thai Training Journal</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
 <style>
   :root {
-    --red: #1a3a6b;
-    --red-dark: #122a52;
-    --red-glow: rgba(26,58,107,0.2);
-    --gold: #c9a84c;
-    --gold-light: #e8c96a;
-    --dark: #080e1a;
-    --dark-2: #0f1a2e;
-    --dark-3: #162438;
-    --dark-4: #1d2f47;
-    --warm-mid: #3a5070;
-    --warm-light: #6a8aaa;
-    --cream: #f0f4ff;
-    --muted: #7a90b0;
-    --border: rgba(255,255,255,0.08);
-    --border-warm: rgba(201,168,76,0.25);
+    --ink: #1a1a2e;
+    --text: #2a2a3e;
+    --muted: #7a7a9a;
+    --gold: #c8a84c;
+    --gold-light: #f0d878;
+    --bg: #f8f7f4;
+    --surface: #ffffff;
+    --border: #e4e2dc;
+    --border-strong: #c8c4bc;
+    --success: #3a7a5a;
+    --danger: #c0392b;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'Crimson Pro', Georgia, serif;
-    background: var(--dark);
-    color: var(--cream);
+    font-family: 'Lato', sans-serif;
+    background: var(--bg);
+    color: var(--text);
     min-height: 100vh;
-    overflow-x: hidden;
+    font-size: 16px;
+    line-height: 1.6;
   }
 
-  /* Background texture */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: 
-      radial-gradient(ellipse at 50% 0%, rgba(26,58,107,0.35) 0%, transparent 60%),
-      radial-gradient(ellipse at 100% 100%, rgba(201,168,76,0.08) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: 0;
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  .app {
-    position: relative;
-    z-index: 1;
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 0 1rem 4rem;
-  }
+  .app { max-width: 640px; margin: 0 auto; padding: 0 1rem 5rem; }
 
   /* Header */
   .header {
-    text-align: center;
-    padding: 2.5rem 0 2rem;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 2rem;
+    padding: 2rem 0 1.5rem;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 1.75rem;
   }
 
-  .gym-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 0.85rem;
-    letter-spacing: 0.3em;
-    color: var(--gold);
-    margin-bottom: 0.5rem;
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.25rem;
   }
 
-  .app-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 3rem;
-    letter-spacing: 0.05em;
-    color: var(--cream);
-    line-height: 1;
-    margin-bottom: 0.4rem;
+  .journal-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.9rem;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.1;
   }
 
-  .app-title span { color: var(--red); }
+  .journal-title em { font-style: italic; color: var(--gold); }
+
+  .byline { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; }
 
   .one-percent {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.6rem;
-    letter-spacing: 0.2em;
-    color: var(--muted);
-    margin: 0.2rem 0 0.4rem;
-  }
-
-  .one-percent span {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 0.95rem;
+    font-style: italic;
     color: var(--gold);
+    text-align: right;
+    padding-top: 0.25rem;
   }
 
-  .app-subtitle {
+  /* Intro */
+  .intro {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 8px;
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 1.75rem;
     font-size: 0.95rem;
     color: var(--muted);
-    font-style: italic;
-    font-weight: 300;
+    line-height: 1.7;
   }
 
-  /* Nav tabs */
+  .intro strong { color: var(--ink); font-weight: 700; }
+
+  /* Stats */
+  .stats-row {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
+    flex-wrap: wrap;
+  }
+
+  .stat-card {
+    flex: 1;
+    min-width: 80px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 0.2rem;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+  }
+
+  /* Nav */
   .nav {
     display: flex;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
-    background: var(--dark-2);
-    border-radius: 8px;
-    padding: 0.3rem;
-    border: 1px solid var(--border);
+    gap: 0;
+    margin-bottom: 1.75rem;
+    border-bottom: 2px solid var(--border);
   }
 
   .nav-btn {
     flex: 1;
-    padding: 0.6rem;
+    padding: 0.7rem 0.5rem;
     border: none;
     background: transparent;
     color: var(--muted);
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 0.9rem;
-    letter-spacing: 0.1em;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
     cursor: pointer;
-    border-radius: 6px;
-    transition: all 0.2s;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.15s;
+    text-transform: uppercase;
   }
 
   .nav-btn.active {
-    background: var(--red);
-    color: white;
+    color: var(--ink);
+    border-bottom-color: var(--ink);
   }
 
-  .nav-btn:hover:not(.active) {
-    color: var(--cream);
-    background: var(--dark-3);
-  }
+  .nav-btn:hover:not(.active) { color: var(--ink); }
 
   /* Views */
-  .view { display: none; }
+  .view { display: none; animation: fadeIn 0.3s ease; }
   .view.active { display: block; }
 
-  /* Form */
-  .form-section {
-    margin-bottom: 1.5rem;
-  }
+  /* Form fields */
+  .field-group { margin-bottom: 1.4rem; }
 
   .field-label {
     display: block;
-    font-size: 0.68rem;
-    letter-spacing: 0.22em;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--muted);
     margin-bottom: 0.5rem;
+    font-weight: 700;
   }
 
   .field-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.4rem;
   }
 
   input[type="text"],
@@ -165,222 +184,203 @@
   select,
   textarea {
     width: 100%;
-    padding: 0.75rem 1rem;
-    background: var(--dark-2);
-    border: 1px solid var(--border);
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--border-strong);
     border-radius: 6px;
-    color: var(--cream);
-    font-family: 'Crimson Pro', Georgia, serif;
+    background: var(--surface);
+    font-family: 'Lato', sans-serif;
     font-size: 1rem;
+    color: var(--ink);
     outline: none;
     transition: border-color 0.2s;
     -webkit-appearance: none;
-  }
-
-  input:focus, select:focus, textarea:focus {
-    border-color: var(--red);
-  }
-
-  input::placeholder, textarea::placeholder {
-    color: var(--warm-mid);
-    font-style: italic;
-  }
-
-  select option {
-    background: var(--dark-3);
-    color: var(--cream);
-  }
-
-  textarea {
-    resize: vertical;
-    min-height: 90px;
     line-height: 1.5;
   }
 
-  /* Domain pills */
-  .domain-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--ink);
   }
 
-  .domain-pill {
-    padding: 0.4rem 1rem;
+  input::placeholder, textarea::placeholder {
+    color: #b8b4ac;
+    font-style: italic;
+  }
+
+  textarea { resize: vertical; min-height: 90px; }
+
+  /* Domain pills */
+  .pill-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+  .pill {
+    padding: 0.4rem 0.9rem;
     border-radius: 20px;
-    border: 1px solid var(--border);
-    background: var(--dark-2);
-    color: var(--muted);
-    font-family: 'Crimson Pro', Georgia, serif;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
     font-size: 0.88rem;
     cursor: pointer;
     transition: all 0.15s;
     white-space: nowrap;
   }
 
-  .domain-pill:hover {
-    border-color: var(--red);
-    color: var(--cream);
-  }
+  .pill:hover { border-color: var(--ink); }
 
-  .domain-pill.selected {
-    background: var(--red);
-    border-color: var(--red);
+  .pill.selected {
+    background: var(--ink);
+    border-color: var(--ink);
     color: white;
   }
 
-  /* Takeaway highlight box */
-  .takeaway-box {
-    position: relative;
-    margin-bottom: 1.5rem;
+  /* Other domain input */
+  .other-input {
+    margin-top: 0.6rem;
+    display: none;
   }
 
-  .takeaway-box::before {
+  .other-input.visible { display: block; }
+
+  /* Takeaway highlight */
+  .takeaway-wrap { position: relative; }
+
+  .takeaway-wrap::before {
     content: '"';
     position: absolute;
-    top: -0.5rem;
+    top: -0.6rem;
     left: 0.75rem;
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Playfair Display', Georgia, serif;
     font-size: 3rem;
-    color: var(--red);
-    opacity: 0.4;
+    color: var(--gold);
+    opacity: 0.5;
     line-height: 1;
     pointer-events: none;
   }
 
-  .takeaway-box textarea {
-    padding-top: 1.5rem;
+  .takeaway-wrap textarea {
+    padding-top: 1.6rem;
     font-size: 1.05rem;
-    border-color: rgba(192,57,43,0.3);
     min-height: 100px;
+    border-color: var(--gold);
   }
 
-  .takeaway-box textarea:focus {
-    border-color: var(--red);
-  }
+  .takeaway-wrap textarea:focus { border-color: var(--ink); }
 
-  /* Mood row */
-  .mood-row {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-  }
+  /* Mood */
+  .mood-grid { display: flex; gap: 0.5rem; flex-wrap: wrap; }
 
   .mood-btn {
-    padding: 0.4rem 0.9rem;
+    padding: 0.4rem 0.85rem;
     border-radius: 20px;
-    border: 1px solid var(--border);
-    background: var(--dark-2);
-    color: var(--muted);
-    font-family: 'Crimson Pro', Georgia, serif;
-    font-size: 0.9rem;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.88rem;
     cursor: pointer;
     transition: all 0.15s;
   }
 
   .mood-btn.selected {
-    background: var(--dark-3);
+    background: var(--gold);
     border-color: var(--gold);
-    color: var(--gold-light);
+    color: var(--ink);
+    font-weight: 700;
   }
 
-  /* Submit button */
+  /* Submit */
   .submit-btn {
     width: 100%;
     padding: 1rem;
-    background: var(--red);
+    background: var(--ink);
     border: none;
     border-radius: 8px;
     color: white;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.2rem;
-    letter-spacing: 0.15em;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     cursor: pointer;
     transition: background 0.2s;
     margin-top: 0.5rem;
   }
 
-  .submit-btn:hover { background: var(--red-dark); }
+  .submit-btn:hover { background: #2d2d50; }
+
+  /* Section divider */
+  .section-divider {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+    margin: 1.75rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
 
   /* Entries */
-  .entries-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.25rem;
-  }
-
-  .entries-count {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 0.85rem;
-    letter-spacing: 0.15em;
-    color: var(--muted);
-  }
-
   .entry-card {
-    background: var(--dark-2);
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 10px;
-    padding: 1.25rem 1.5rem;
-    margin-bottom: 1rem;
-    transition: border-color 0.2s;
-    animation: slideIn 0.3s ease;
+    padding: 1.25rem 1.4rem;
+    margin-bottom: 0.85rem;
+    animation: fadeIn 0.3s ease;
   }
 
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .entry-card:hover { border-color: rgba(192,57,43,0.3); }
-
-  .entry-top {
+  .entry-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 0.75rem;
-    gap: 1rem;
+    margin-bottom: 0.6rem;
+    gap: 0.75rem;
   }
 
-  .entry-meta { flex: 1; }
-
-  .entry-name {
-    font-family: 'Bebas Neue', sans-serif;
+  .entry-title {
+    font-family: 'Playfair Display', Georgia, serif;
     font-size: 1rem;
-    letter-spacing: 0.08em;
-    color: var(--cream);
-    margin-bottom: 0.2rem;
+    color: var(--ink);
+    font-weight: 400;
   }
 
-  .entry-date {
-    font-size: 0.78rem;
-    color: var(--muted);
-  }
+  .entry-date { font-size: 0.78rem; color: var(--muted); margin-top: 0.15rem; }
 
   .entry-domain {
-    padding: 0.2rem 0.7rem;
-    background: var(--red);
+    padding: 0.18rem 0.65rem;
+    background: var(--ink);
     border-radius: 12px;
-    font-size: 0.75rem;
-    font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 0.08em;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
     color: white;
     white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .entry-takeaway {
-    font-size: 1.05rem;
-    color: var(--cream);
+    font-size: 1rem;
+    color: var(--text);
     font-style: italic;
-    line-height: 1.5;
-    margin-bottom: 0.75rem;
+    line-height: 1.6;
+    margin-bottom: 0.6rem;
     padding-left: 0.75rem;
-    border-left: 2px solid var(--red);
+    border-left: 2px solid var(--gold);
   }
+
+  .entry-coach {
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+    padding-left: 0.75rem;
+  }
+
+  .entry-coach strong { color: var(--ink); font-weight: 700; }
 
   .entry-detail {
     font-size: 0.88rem;
-    color: var(--warm-light);
-    line-height: 1.5;
+    color: var(--muted);
+    line-height: 1.55;
   }
 
   .entry-footer {
@@ -390,49 +390,137 @@
     margin-top: 0.75rem;
     padding-top: 0.75rem;
     border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
 
-  .entry-mood {
-    font-size: 0.88rem;
-    color: var(--muted);
-  }
+  .entry-mood { font-size: 0.85rem; color: var(--muted); }
 
   .share-btn {
-    padding: 0.25rem 0.75rem;
+    padding: 0.2rem 0.65rem;
     border-radius: 12px;
-    border: 1px solid var(--border-warm);
+    border: 1px solid var(--border-strong);
     background: transparent;
-    color: var(--gold);
-    font-family: 'Crimson Pro', Georgia, serif;
-    font-size: 0.8rem;
+    color: var(--muted);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.78rem;
     cursor: pointer;
     transition: all 0.15s;
   }
 
-  .share-btn:hover {
-    background: rgba(212,172,13,0.1);
+  .share-btn:hover { border-color: var(--ink); color: var(--ink); }
+  .share-btn.copied { color: var(--success); border-color: var(--success); }
+
+  /* Injury tab */
+  .injury-form {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.4rem;
+    margin-bottom: 1.5rem;
   }
 
-  .share-btn.copied {
-    color: var(--gold-light);
-    border-color: var(--gold-light);
+  .injury-form-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.05rem;
+    color: var(--ink);
+    margin-bottom: 1.1rem;
+    font-weight: 400;
   }
 
+  .severity-grid { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+  .severity-btn {
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .severity-btn.selected.mild { background: #e8f4e8; border-color: var(--success); color: var(--success); font-weight: 700; }
+  .severity-btn.selected.moderate { background: #fff4e0; border-color: #c8873a; color: #c8873a; font-weight: 700; }
+  .severity-btn.selected.serious { background: #fde8e8; border-color: var(--danger); color: var(--danger); font-weight: 700; }
+
+  .training-toggle {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .toggle-btn {
+    flex: 1;
+    padding: 0.6rem;
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+    background: var(--surface);
+    color: var(--muted);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: center;
+  }
+
+  .toggle-btn.selected {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: white;
+    font-weight: 700;
+  }
+
+  .injury-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.1rem 1.4rem;
+    margin-bottom: 0.75rem;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .injury-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.4rem;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .injury-part {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem;
+    color: var(--ink);
+  }
+
+  .injury-date { font-size: 0.78rem; color: var(--muted); }
+
+  .injury-badge {
+    padding: 0.15rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.72rem;
+    font-weight: 700;
+  }
+
+  .badge-mild { background: #e8f4e8; color: var(--success); }
+  .badge-moderate { background: #fff4e0; color: #c8873a; }
+  .badge-serious { background: #fde8e8; color: var(--danger); }
+
+  .injury-what { font-size: 0.92rem; color: var(--text); margin: 0.4rem 0; line-height: 1.55; }
+  .injury-status { font-size: 0.82rem; color: var(--muted); font-style: italic; }
+
+  /* Empty state */
   .empty-state {
     text-align: center;
     padding: 3rem 1rem;
     color: var(--muted);
-  }
-
-  .empty-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    opacity: 0.4;
-  }
-
-  .empty-text {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-style: italic;
+    line-height: 1.8;
   }
 
   /* Toast */
@@ -440,14 +528,12 @@
     position: fixed;
     bottom: 2rem;
     left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    background: var(--dark-3);
-    border: 1px solid var(--border-warm);
-    color: var(--gold-light);
-    padding: 0.75rem 1.5rem;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--ink);
+    color: white;
+    padding: 0.7rem 1.5rem;
     border-radius: 8px;
     font-size: 0.9rem;
-    font-style: italic;
     transition: transform 0.3s ease;
     z-index: 100;
     white-space: nowrap;
@@ -456,24 +542,50 @@
   .toast.show { transform: translateX(-50%) translateY(0); }
 
   @media (max-width: 480px) {
-    .app-title { font-size: 2.2rem; }
     .field-row { grid-template-columns: 1fr; }
+    .journal-title { font-size: 1.6rem; }
+    body { font-size: 15px; }
   }
 </style>
 </head>
 <body>
-
 <div class="app">
+
+  <!-- Header -->
   <div class="header">
-    <div class="gym-name">NJ Muay Thai Academy</div>
-    <div class="app-title">Training <span>Journal</span></div>
-    <div class="one-percent">1% <span>Better</span></div>
-    <p class="app-subtitle">One takeaway. Every session. Every bit of improvement counts.</p>
+    <div class="header-top">
+      <div>
+        <div class="journal-title">Muay Thai<br><em>Training Journal</em></div>
+        <div class="byline">by Grace Chen</div>
+      </div>
+      <div class="one-percent">1% Better<br>every session</div>
+    </div>
   </div>
 
+  <!-- Intro -->
+  <div class="intro">
+    <strong>You don't improve by training. You improve by training and reflecting.</strong><br>
+    This journal is here to help you grow. One takeaway per session, logged over time, builds a record of your development that you simply can't see in the moment. Show up. Write it down. Watch yourself grow.
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-number" id="totalSessions">0</div>
+      <div class="stat-label">Sessions</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number" id="thisMonth">0</div>
+      <div class="stat-label">This Month</div>
+    </div>
+
+  </div>
+
+  <!-- Nav -->
   <div class="nav">
-    <button class="nav-btn active" onclick="showView('log')">Log Session</button>
-    <button class="nav-btn" onclick="showView('entries')">My Entries</button>
+    <button class="nav-btn active" onclick="showView('log', this)">Log Session</button>
+    <button class="nav-btn" onclick="showView('entries', this)">My Journal</button>
+    <button class="nav-btn" onclick="showView('injuries', this)">Injuries</button>
   </div>
 
   <!-- LOG SESSION -->
@@ -490,7 +602,7 @@
       </div>
     </div>
 
-    <div class="form-section">
+    <div class="field-group">
       <label class="field-label">Session Type</label>
       <select id="sessionType">
         <option value="">Select a session...</option>
@@ -500,6 +612,7 @@
           <option>Open Mat Time</option>
         </optgroup>
         <optgroup label="Specialty Classes">
+          <option>Boxing for Intermediates</option>
           <option>Clinching for Intermediates</option>
           <option>Principles of Defense and Sparring</option>
         </optgroup>
@@ -515,36 +628,45 @@
       </select>
     </div>
 
-    <div class="form-section">
+    <div class="field-group">
       <label class="field-label">Domain Focus</label>
-      <div class="domain-grid" id="domainGrid">
-        <button class="domain-pill" onclick="toggleDomain(this)">Stance</button>
-        <button class="domain-pill" onclick="toggleDomain(this)">Guard</button>
-        <button class="domain-pill" onclick="toggleDomain(this)">Footwork</button>
-        <button class="domain-pill" onclick="toggleDomain(this)">Strikes</button>
-        <button class="domain-pill" onclick="toggleDomain(this)">Defense</button>
-        <button class="domain-pill" onclick="toggleDomain(this)">Clinch</button>
-        <button class="domain-pill" onclick="toggleDomain(this)">Sparring</button>
-        <button class="domain-pill" onclick="toggleDomain(this)">Conditioning</button>
-        <button class="domain-pill" onclick="toggleDomain(this)">Combinations & Flow</button>
+      <div class="pill-grid">
+        <button class="pill" onclick="toggleDomain(this)">Stance</button>
+        <button class="pill" onclick="toggleDomain(this)">Guard</button>
+        <button class="pill" onclick="toggleDomain(this)">Footwork</button>
+        <button class="pill" onclick="toggleDomain(this)">Strikes</button>
+        <button class="pill" onclick="toggleDomain(this)">Defense</button>
+        <button class="pill" onclick="toggleDomain(this)">Clinch</button>
+        <button class="pill" onclick="toggleDomain(this)">Sparring</button>
+        <button class="pill" onclick="toggleDomain(this)">Conditioning</button>
+        <button class="pill" onclick="toggleDomain(this)">Combinations & Flow</button>
+        <button class="pill" onclick="toggleDomain(this, true)">Other</button>
+      </div>
+      <div class="other-input" id="otherDomainWrap">
+        <input type="text" id="otherDomain" placeholder="Describe the focus area...">
       </div>
     </div>
 
-    <div class="form-section">
+    <div class="field-group">
       <label class="field-label">Today's One Takeaway</label>
-      <div class="takeaway-box">
+      <div class="takeaway-wrap">
         <textarea id="takeaway" placeholder="What's the one thing that clicked today? A correction, a breakthrough, something your coach said..."></textarea>
       </div>
     </div>
 
-    <div class="form-section">
-      <label class="field-label">More Detail (optional)</label>
-      <textarea id="detail" placeholder="What were the specific conditions? What led to this? How will you practice it?"></textarea>
+    <div class="field-group">
+      <label class="field-label">Coach Said... <span style="font-weight:300; text-transform:none; letter-spacing:0;">(optional)</span></label>
+      <input type="text" id="coachSaid" placeholder="A specific correction or instruction from your coach today">
     </div>
 
-    <div class="form-section">
-      <label class="field-label">How did training feel today?</label>
-      <div class="mood-row">
+    <div class="field-group">
+      <label class="field-label">Additional Notes <span style="font-weight:300; text-transform:none; letter-spacing:0;">(optional)</span></label>
+      <textarea id="detail" placeholder="Anything else worth remembering about today's session..."></textarea>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">How did training feel?</label>
+      <div class="mood-grid">
         <button class="mood-btn" onclick="toggleMood(this)">🔥 On fire</button>
         <button class="mood-btn" onclick="toggleMood(this)">💪 Solid</button>
         <button class="mood-btn" onclick="toggleMood(this)">🧱 Hard work</button>
@@ -558,10 +680,57 @@
 
   <!-- ENTRIES -->
   <div class="view" id="view-entries">
-    <div class="entries-header">
-      <div class="entries-count" id="entriesCount">0 Sessions Logged</div>
-    </div>
     <div id="entriesList"></div>
+  </div>
+
+  <!-- INJURIES -->
+  <div class="view" id="view-injuries">
+
+    <div class="injury-form">
+      <div class="injury-form-title">Log an injury</div>
+
+      <div class="field-row">
+        <div>
+          <label class="field-label">Body Part</label>
+          <input type="text" id="injuryPart" placeholder="e.g. Left knee, right shoulder">
+        </div>
+        <div>
+          <label class="field-label">Date</label>
+          <input type="date" id="injuryDate">
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">What happened?</label>
+        <textarea id="injuryWhat" placeholder="How did it happen? What does it feel like?" style="min-height:70px;"></textarea>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Severity</label>
+        <div class="severity-grid">
+          <button class="severity-btn mild" onclick="selectSeverity(this, 'Mild')">Mild</button>
+          <button class="severity-btn moderate" onclick="selectSeverity(this, 'Moderate')">Moderate</button>
+          <button class="severity-btn serious" onclick="selectSeverity(this, 'Serious')">Serious</button>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Training through it?</label>
+        <div class="training-toggle">
+          <button class="toggle-btn" onclick="selectTraining(this, 'Yes — training through it')">Yes, training through it</button>
+          <button class="toggle-btn" onclick="selectTraining(this, 'No — resting')">No, resting</button>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Recovery Notes <span style="font-weight:300; text-transform:none; letter-spacing:0;">(optional)</span></label>
+        <input type="text" id="injuryNotes" placeholder="Ice, physio, doctor's advice...">
+      </div>
+
+      <button class="submit-btn" onclick="saveInjury()">Log This Injury</button>
+    </div>
+
+    <div id="injuriesList"></div>
   </div>
 
 </div>
@@ -569,24 +738,34 @@
 <div class="toast" id="toast"></div>
 
 <script>
-  // Set today's date
-  document.getElementById("sessionDate").valueAsDate = new Date();
+  document.getElementById('sessionDate').valueAsDate = new Date();
+  document.getElementById('injuryDate').valueAsDate = new Date();
 
   let selectedDomain = null;
   let selectedMood = null;
+  let selectedSeverity = null;
+  let selectedTraining = null;
 
-  function showView(name) {
+  function getEntries() { return JSON.parse(localStorage.getItem('mtEntries2') || '[]'); }
+  function saveEntries(e) { localStorage.setItem('mtEntries2', JSON.stringify(e)); }
+  function getInjuries() { return JSON.parse(localStorage.getItem('mtInjuries2') || '[]'); }
+  function saveInjuries(i) { localStorage.setItem('mtInjuries2', JSON.stringify(i)); }
+
+  function showView(name, btn) {
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('view-' + name).classList.add('active');
-    event.target.classList.add('active');
+    btn.classList.add('active');
     if (name === 'entries') renderEntries();
+    if (name === 'injuries') renderInjuries();
   }
 
-  function toggleDomain(el) {
-    document.querySelectorAll('.domain-pill').forEach(p => p.classList.remove('selected'));
+  function toggleDomain(el, isOther) {
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('selected'));
     el.classList.add('selected');
-    selectedDomain = el.textContent;
+    selectedDomain = isOther ? null : el.textContent;
+    document.getElementById('otherDomainWrap').classList.toggle('visible', !!isOther);
+    if (!isOther) document.getElementById('otherDomain').value = '';
   }
 
   function toggleMood(el) {
@@ -595,12 +774,27 @@
     selectedMood = el.textContent;
   }
 
+  function selectSeverity(el, val) {
+    document.querySelectorAll('.severity-btn').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedSeverity = val;
+  }
+
+  function selectTraining(el, val) {
+    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedTraining = val;
+  }
+
   function saveEntry() {
     const name = document.getElementById('trainerName').value.trim();
     const date = document.getElementById('sessionDate').value;
     const type = document.getElementById('sessionType').value;
     const takeaway = document.getElementById('takeaway').value.trim();
+    const coachSaid = document.getElementById('coachSaid').value.trim();
     const detail = document.getElementById('detail').value.trim();
+    const otherDomain = document.getElementById('otherDomain').value.trim();
+    const domain = otherDomain || selectedDomain || 'General';
 
     if (!name || !date || !type || !takeaway) {
       showToast("Fill in your name, date, session type, and takeaway ✊");
@@ -608,18 +802,15 @@
     }
 
     const entry = {
-      id: Date.now(),
-      name, date, type,
-      domain: selectedDomain || "General",
-      takeaway, detail,
-      mood: selectedMood || null,
-      saved: new Date().toISOString()
+      id: Date.now(), name, date, type, domain,
+      takeaway, coachSaid, detail,
+      mood: selectedMood || null
     };
 
-    const entries = JSON.parse(localStorage.getItem('mtJournalEntries') || '[]');
+    const entries = getEntries();
     entries.unshift(entry);
-    localStorage.setItem('mtJournalEntries', JSON.stringify(entries));
-
+    saveEntries(entries);
+    updateStats();
     showToast("Session logged. Keep showing up. 🥊");
     resetForm();
   }
@@ -629,70 +820,133 @@
     document.getElementById('sessionDate').valueAsDate = new Date();
     document.getElementById('sessionType').value = '';
     document.getElementById('takeaway').value = '';
+    document.getElementById('coachSaid').value = '';
     document.getElementById('detail').value = '';
-    document.querySelectorAll('.domain-pill').forEach(p => p.classList.remove('selected'));
+    document.getElementById('otherDomain').value = '';
+    document.getElementById('otherDomainWrap').classList.remove('visible');
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('selected'));
     document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
-    selectedDomain = null;
-    selectedMood = null;
+    selectedDomain = null; selectedMood = null;
   }
 
-  function renderEntries() {
-    const entries = JSON.parse(localStorage.getItem('mtJournalEntries') || '[]');
-    const list = document.getElementById('entriesList');
-    const count = document.getElementById('entriesCount');
-    count.textContent = entries.length + (entries.length === 1 ? ' Session Logged' : ' Sessions Logged');
+  function saveInjury() {
+    const part = document.getElementById('injuryPart').value.trim();
+    const date = document.getElementById('injuryDate').value;
+    const what = document.getElementById('injuryWhat').value.trim();
+    const notes = document.getElementById('injuryNotes').value.trim();
 
-    if (entries.length === 0) {
-      list.innerHTML = `
-        <div class="empty-state">
-          <div class="empty-icon">🥊</div>
-          <div class="empty-text">No sessions yet. Log your first one.</div>
-        </div>`;
+    if (!part || !date || !what) {
+      showToast("Fill in body part, date, and what happened.");
       return;
     }
 
-    list.innerHTML = entries.map(e => `
+    const injury = {
+      id: Date.now(), part, date, what, notes,
+      severity: selectedSeverity || 'Mild',
+      training: selectedTraining || 'Not specified'
+    };
+
+    const injuries = getInjuries();
+    injuries.unshift(injury);
+    saveInjuries(injuries);
+    updateStats();
+    showToast("Injury logged. Rest up and recover well. 🙏");
+    resetInjuryForm();
+    renderInjuries();
+  }
+
+  function resetInjuryForm() {
+    document.getElementById('injuryPart').value = '';
+    document.getElementById('injuryDate').valueAsDate = new Date();
+    document.getElementById('injuryWhat').value = '';
+    document.getElementById('injuryNotes').value = '';
+    document.querySelectorAll('.severity-btn').forEach(b => b.classList.remove('selected'));
+    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('selected'));
+    selectedSeverity = null; selectedTraining = null;
+  }
+
+  function renderEntries() {
+    const entries = getEntries();
+    const container = document.getElementById('entriesList');
+
+    if (!entries.length) {
+      container.innerHTML = '<div class="empty-state">No sessions logged yet.<br>Your journal builds here over time.<br><br>Show up. Write it down.</div>';
+      return;
+    }
+
+    container.innerHTML = entries.map(e => `
       <div class="entry-card">
-        <div class="entry-top">
-          <div class="entry-meta">
-            <div class="entry-name">${e.name} · ${e.type}</div>
+        <div class="entry-header">
+          <div>
+            <div class="entry-title">${e.name} · ${e.type}</div>
             <div class="entry-date">${formatDate(e.date)}</div>
           </div>
           <div class="entry-domain">${e.domain}</div>
         </div>
         <div class="entry-takeaway">${e.takeaway}</div>
+        ${e.coachSaid ? `<div class="entry-coach"><strong>Coach said:</strong> ${e.coachSaid}</div>` : ''}
         ${e.detail ? `<div class="entry-detail">${e.detail}</div>` : ''}
         <div class="entry-footer">
           <div class="entry-mood">${e.mood || ''}</div>
-          <button class="share-btn" onclick="shareEntry(${e.id}, this)">Share this ✦</button>
+          <button class="share-btn" onclick="shareEntry(${e.id}, this)">Share ✦</button>
         </div>
-      </div>
-    `).join('');
+      </div>`).join('');
+  }
+
+  function renderInjuries() {
+    const injuries = getInjuries();
+    const container = document.getElementById('injuriesList');
+
+    if (!injuries.length) {
+      container.innerHTML = '<div class="empty-state">No injuries logged yet.<br>Hopefully it stays that way. 🙏</div>';
+      return;
+    }
+
+    const badgeClass = { Mild: 'badge-mild', Moderate: 'badge-moderate', Serious: 'badge-serious' };
+
+    container.innerHTML = `<div class="section-divider">Injury History</div>` +
+      injuries.map(i => `
+        <div class="injury-card">
+          <div class="injury-card-header">
+            <div class="injury-part">${i.part}</div>
+            <span class="injury-badge ${badgeClass[i.severity] || 'badge-mild'}">${i.severity}</span>
+            <div class="injury-date">${formatDate(i.date)}</div>
+          </div>
+          <div class="injury-what">${i.what}</div>
+          <div class="injury-status">${i.training}${i.notes ? ' · ' + i.notes : ''}</div>
+        </div>`).join('');
   }
 
   function formatDate(dateStr) {
     const d = new Date(dateStr + 'T12:00:00');
-    return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+    return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
   }
 
   function shareEntry(id, btn) {
-    const entries = JSON.parse(localStorage.getItem('mtJournalEntries') || '[]');
-    const e = entries.find(x => x.id === id);
+    const e = getEntries().find(x => x.id === id);
     if (!e) return;
-    const text = `🥊 Training log — ${formatDate(e.date)}\n\nSession: ${e.type} · ${e.domain}\n\n"${e.takeaway}"${e.detail ? '\n\n' + e.detail : ''}\n\n${e.mood || ''}\n\n#MuayThai #NJMuayThaiAcademy #TrainingJournal`;
+    const text = `🥊 Training log — ${formatDate(e.date)}\n\nSession: ${e.type} · ${e.domain}\n\n"${e.takeaway}"${e.coachSaid ? '\n\nCoach said: ' + e.coachSaid : ''}${e.detail ? '\n\n' + e.detail : ''}\n\n${e.mood || ''}\n\n#MuayThai #TrainingJournal #1PercentBetter`;
     navigator.clipboard.writeText(text).then(() => {
       btn.textContent = 'Copied! ✓';
       btn.classList.add('copied');
-      setTimeout(() => { btn.textContent = 'Share this ✦'; btn.classList.remove('copied'); }, 2000);
+      setTimeout(() => { btn.textContent = 'Share ✦'; btn.classList.remove('copied'); }, 2500);
     });
   }
 
-  function showToast(msg) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 2800);
+  function updateStats() {
+    const entries = getEntries();
+    const injuries = getInjuries();
+    const now = new Date();
+    const thisMonth = entries.filter(e => {
+      const d = new Date(e.date);
+      return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+    }).length;
+    document.getElementById('totalSessions').textContent = entries.length;
+    document.getElementById('thisMonth').textContent = thisMonth;
+
   }
+
+  updateStats();
 </script>
 </body>
 </html>
