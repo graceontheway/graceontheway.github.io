@@ -809,13 +809,14 @@
 
     // Show success then reload the log view cleanly
     showToast("Session logged. Keep showing up. 🥊");
-    setTimeout(() => {
-      document.getElementById('view-log').innerHTML = buildLogForm();
+    setTimeout(function() {
+      var logView = document.getElementById('view-log');
+      logView.innerHTML = buildLogForm();
       document.getElementById('sessionDate').valueAsDate = new Date();
       selectedDomain = null;
       selectedMood = null;
       window.scrollTo(0, 0);
-    }, 400);
+    }, 600);;
   }
 
   function buildLogForm() {
